@@ -1,6 +1,6 @@
 ﻿namespace PacManRu
 {
-    partial class Form1
+    partial class Game
     {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,8 @@
             // 
             // Hero
             // 
-            this.Hero.Location = new System.Drawing.Point(87, 136);
+            this.Hero.BackColor = System.Drawing.Color.Salmon;
+            this.Hero.Location = new System.Drawing.Point(300, 223);
             this.Hero.Name = "Hero";
             this.Hero.Size = new System.Drawing.Size(150, 150);
             this.Hero.TabIndex = 0;
@@ -46,7 +47,7 @@
             // 
             // Food
             // 
-            this.Food.Location = new System.Drawing.Point(384, 87);
+            this.Food.Location = new System.Drawing.Point(590, 95);
             this.Food.Name = "Food";
             this.Food.Size = new System.Drawing.Size(50, 50);
             this.Food.TabIndex = 1;
@@ -54,22 +55,23 @@
             // 
             // Enemy
             // 
-            this.Enemy.Location = new System.Drawing.Point(415, 219);
+            this.Enemy.Location = new System.Drawing.Point(662, 212);
             this.Enemy.Name = "Enemy";
             this.Enemy.Size = new System.Drawing.Size(80, 80);
             this.Enemy.TabIndex = 2;
             this.Enemy.TabStop = false;
             // 
-            // Form1
+            // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(805, 445);
             this.Controls.Add(this.Enemy);
             this.Controls.Add(this.Food);
             this.Controls.Add(this.Hero);
-            this.Name = "Form1";
+            this.Name = "Game";
             this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Game_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.Hero)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Food)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Enemy)).EndInit();

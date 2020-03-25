@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PacManRu
 {
-    public partial class Form1 : Form
+    public partial class Game : Form
     {
-        public Form1()
+        public Game()
         {
             InitializeComponent();
             SetupGame();
@@ -25,5 +25,24 @@ namespace PacManRu
             Enemy.BackColor = Color.Blue;
         }
 
+        private void Game_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Up)
+            {
+                Hero.Top -= 5;
+            }
+            else if(e.KeyCode == Keys.Down)
+            {
+                Hero.Top += 5;
+            }
+            else if (e.KeyCode == Keys.Left)
+            {
+                Hero.Left -= 5;
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                Hero.Left += 5;
+            }
+        }
     }
 }
