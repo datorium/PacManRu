@@ -32,6 +32,10 @@ namespace PacManRu
             {
                 Hero.Top = ClientRectangle.Height;
             }
+            if(Hero.Top > ClientRectangle.Height)
+            {
+                Hero.Top = 0 - Hero.Height;
+            }
         }
 
         private void Game_KeyDown(object sender, KeyEventArgs e)
