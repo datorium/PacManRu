@@ -15,6 +15,15 @@ namespace PacManRu
         public Form1()
         {
             InitializeComponent();
+            SetupGame();
         }
+
+        private void SetupGame()
+        {
+            Hero.BackColor = Color.DarkSalmon;
+            Food.BackColor = Color.Green;
+            Enemy.BackColor = Color.Blue;
+        }
+
     }
 }
