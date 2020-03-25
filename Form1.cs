@@ -12,6 +12,7 @@ namespace PacManRu
 {
     public partial class Game : Form
     {
+        int heroStep = 5;
         public Game()
         {
             InitializeComponent();
@@ -25,24 +26,33 @@ namespace PacManRu
             Enemy.BackColor = Color.Blue;
         }
 
+        private void HeroBorderCollision()
+        {
+            if(Hero.Top + Hero.Height < 0)
+            {
+                Hero.Top = ClientRectangle.Height;
+            }
+        }
+
         private void Game_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Up)
             {
-                Hero.Top -= 5;
+                Hero.Top -= heroStep;
             }
             else if(e.KeyCode == Keys.Down)
             {
-                Hero.Top += 5;
+                Hero.Top += heroStep;
             }
             else if (e.KeyCode == Keys.Left)
             {
-                Hero.Left -= 5;
+                Hero.Left -= heroStep;
             }
             else if (e.KeyCode == Keys.Right)
             {
-                Hero.Left += 5;
+                Hero.Left += heroStep;
             }
+            HeroBorderCollision();
         }
     }
 }
