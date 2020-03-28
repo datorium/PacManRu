@@ -15,6 +15,8 @@ namespace PacManRu
         int heroStep = 5;
         int verVelocity = 0;
         int horVelocity = 0;
+        int heroImage = 1;
+        string heroDirection = "right";
 
         public Game()
         {
@@ -29,6 +31,7 @@ namespace PacManRu
             Enemy.BackColor = Color.Blue;
             //initializing timers
             TimerHeroMove.Start();
+            TimerHeroAnimate.Start();
         }
 
         private void HeroBorderCollision()
@@ -81,6 +84,18 @@ namespace PacManRu
             Hero.Top += verVelocity;
             Hero.Left += horVelocity;
             HeroBorderCollision();
+        }
+
+        private void TimerHeroAnimate_Tick(object sender, EventArgs e)
+        {
+            string heroImageName;
+            heroImageName = "pacman_" + heroDirection + "_" + heroImage;
+            Hero.Image = (Image)Properties.Resources.ResourceManager.GetObject(heroImageName);
+            heroImage += 1; //heroImage++
+            if(heroImage > 4)
+            {
+                heroImage = 1;
+            }
         }
     }
 }
