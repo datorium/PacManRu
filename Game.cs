@@ -26,9 +26,10 @@ namespace PacManRu
 
         private void SetupGame()
         {
-            Hero.BackColor = Color.DarkSalmon;
+            this.BackColor = Color.Blue;
+            Hero.BackColor = Color.Transparent;
             Food.BackColor = Color.Green;
-            Enemy.BackColor = Color.Blue;
+            Enemy.BackColor = Color.Red;
             //initializing timers
             TimerHeroMove.Start();
             TimerHeroAnimate.Start();
@@ -60,22 +61,26 @@ namespace PacManRu
             {
                 verVelocity = -heroStep;
                 horVelocity = 0;
+                heroDirection = "up";
             }
             else if(e.KeyCode == Keys.Down)
             {
                 verVelocity = heroStep;
                 horVelocity = 0;
+                heroDirection = "down";
             }
             else if (e.KeyCode == Keys.Left)
             {
                 verVelocity = 0;
                 horVelocity = -heroStep;
+                heroDirection = "left";
 
             }
             else if (e.KeyCode == Keys.Right)
             {
                 verVelocity = 0;
                 horVelocity = heroStep;
+                heroDirection = "right";
             }            
         }
 
