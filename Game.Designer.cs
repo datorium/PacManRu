@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Hero = new System.Windows.Forms.PictureBox();
             this.Food = new System.Windows.Forms.PictureBox();
             this.Enemy = new System.Windows.Forms.PictureBox();
+            this.TimerHeroMove = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Hero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Food)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Enemy)).BeginInit();
@@ -61,6 +63,11 @@
             this.Enemy.TabIndex = 2;
             this.Enemy.TabStop = false;
             // 
+            // TimerHeroMove
+            // 
+            this.TimerHeroMove.Interval = 20;
+            this.TimerHeroMove.Tick += new System.EventHandler(this.TimerHeroMove_Tick);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -84,6 +91,7 @@
         private System.Windows.Forms.PictureBox Hero;
         private System.Windows.Forms.PictureBox Food;
         private System.Windows.Forms.PictureBox Enemy;
+        private System.Windows.Forms.Timer TimerHeroMove;
     }
 }
 
