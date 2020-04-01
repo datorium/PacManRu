@@ -40,18 +40,25 @@ namespace PacManRu
             Food.Image = Properties.Resources.food_3;
 
             Enemy.BackColor = Color.Red;
+
+            //initialize interface
+            UpdateScoreLabel();
             //initializing timers
             TimerHeroMove.Start();
             TimerHeroAnimate.Start();
         }
 
-
+        private void UpdateScoreLabel()
+        {
+            ScoreLabel.Text = "Score: " + score;
+        }
 
         private void HeroFoodCollision() 
         {
             if (Hero.Bounds.IntersectsWith(Food.Bounds))
             {
                 score += 100;
+                UpdateScoreLabel();
                 RandomizeFood();
             }
         }
