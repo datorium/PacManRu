@@ -16,6 +16,8 @@ namespace PacManRu
         int verVelocity = 0;
         int horVelocity = 0;
         int heroImage = 1;
+        int score = 0;
+
         string heroDirection = "right";
         Random Rand = new Random();
 
@@ -43,10 +45,13 @@ namespace PacManRu
             TimerHeroAnimate.Start();
         }
 
+
+
         private void HeroFoodCollision() 
         {
             if (Hero.Bounds.IntersectsWith(Food.Bounds))
             {
+                score += 100;
                 RandomizeFood();
             }
         }
@@ -55,6 +60,7 @@ namespace PacManRu
         {
             Food.Left = Rand.Next(0, ClientRectangle.Width - Food.Width);
             Food.Top = Rand.Next(0, ClientRectangle.Height - Food.Height);
+            Food.Image = (Image)Properties.Resources.ResourceManager.GetObject("food_" + Rand.Next(1, 5));
         }
 
         private void HeroBorderCollision()
@@ -124,6 +130,11 @@ namespace PacManRu
             {
                 heroImage = 1;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
