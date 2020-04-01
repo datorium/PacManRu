@@ -28,11 +28,26 @@ namespace PacManRu
         {
             this.BackColor = Color.Blue;
             Hero.BackColor = Color.Transparent;
+            Hero.SizeMode = PictureBoxSizeMode.StretchImage;
+            Hero.Width = 50;
+            Hero.Height = 50;
+
             Food.BackColor = Color.Green;
+            Food.BackColor = Color.Transparent;
+            Food.Image = Properties.Resources.food_3;
+
             Enemy.BackColor = Color.Red;
             //initializing timers
             TimerHeroMove.Start();
             TimerHeroAnimate.Start();
+        }
+
+        private void HeroFoodCollision() 
+        {
+            if (Hero.Bounds.IntersectsWith(Food.Bounds))
+            {
+                Food.Dispose();
+            }
         }
 
         private void HeroBorderCollision()
@@ -89,6 +104,7 @@ namespace PacManRu
             Hero.Top += verVelocity;
             Hero.Left += horVelocity;
             HeroBorderCollision();
+            HeroFoodCollision();
         }
 
         private void TimerHeroAnimate_Tick(object sender, EventArgs e)
