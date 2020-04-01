@@ -17,6 +17,7 @@ namespace PacManRu
         int horVelocity = 0;
         int heroImage = 1;
         string heroDirection = "right";
+        Random Rand = new Random();
 
         public Game()
         {
@@ -46,8 +47,14 @@ namespace PacManRu
         {
             if (Hero.Bounds.IntersectsWith(Food.Bounds))
             {
-                Food.Dispose();
+                RandomizeFood();
             }
+        }
+
+        private void RandomizeFood()
+        {
+            Food.Left = Rand.Next(0, ClientRectangle.Width - Food.Width);
+            Food.Top = Rand.Next(0, ClientRectangle.Height - Food.Height);
         }
 
         private void HeroBorderCollision()
