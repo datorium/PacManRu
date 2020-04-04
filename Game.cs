@@ -38,19 +38,26 @@ namespace PacManRu
             if(directionCode == 1)
             {
                 enemyDirection = "right";
-
+                verEnemyVelocity = 0;
+                horEnemyVelocity = enemyStep;
             }
             else if(directionCode == 2)
             {
                 enemyDirection = "down";
+                verEnemyVelocity = enemyStep;
+                horEnemyVelocity = 0;
             }
             else if (directionCode == 3)
             {
                 enemyDirection = "left";
+                verEnemyVelocity = 0;
+                horEnemyVelocity = -enemyStep;
             }
             else if (directionCode == 4)
             {
                 enemyDirection = "up";
+                verEnemyVelocity = -enemyStep;
+                horEnemyVelocity = 0;
             }
         }
 
@@ -72,6 +79,8 @@ namespace PacManRu
             Enemy.Width = 40;
             Enemy.Height = 40;
             Enemy.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            SetRandomEnemyDirection();
 
             //initialize interface
             UpdateScoreLabel();
@@ -137,6 +146,7 @@ namespace PacManRu
             TimerHeroMove.Stop();
             TimerHeroAnimate.Stop();
             TimerEnemyAnimate.Stop();
+            TimerEnemyMove.Stop();
             heroImage = 0;
             TimerHeroMelt.Start();
         }
@@ -167,7 +177,8 @@ namespace PacManRu
                 verVelocity = 0;
                 horVelocity = heroStep;
                 heroDirection = "right";
-            }            
+            }
+            SetRandomEnemyDirection();
         }
 
         private void TimerHeroMove_Tick(object sender, EventArgs e)
