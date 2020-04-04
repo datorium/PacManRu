@@ -13,8 +13,11 @@ namespace PacManRu
     public partial class Game : Form
     {
         int heroStep = 5;
+        int enemyStep = 3;
         int verVelocity = 0;
         int horVelocity = 0;
+        int verEnemyVelocity = 0;
+        int horEnemyVelocity = 0;
         int heroImage = 1;
         int enemyImage = 1;
         int score = 0;
@@ -27,6 +30,28 @@ namespace PacManRu
         {
             InitializeComponent();
             SetupGame();
+        }
+
+        private void SetRandomEnemyDirection()
+        {
+            int directionCode = Rand.Next(1, 5);
+            if(directionCode == 1)
+            {
+                enemyDirection = "right";
+
+            }
+            else if(directionCode == 2)
+            {
+                enemyDirection = "down";
+            }
+            else if (directionCode == 3)
+            {
+                enemyDirection = "left";
+            }
+            else if (directionCode == 4)
+            {
+                enemyDirection = "up";
+            }
         }
 
         private void SetupGame()
@@ -54,6 +79,7 @@ namespace PacManRu
             TimerHeroMove.Start();
             TimerHeroAnimate.Start();
             TimerEnemyAnimate.Start();
+            TimerEnemyMove.Start();
         }
 
         private void UpdateScoreLabel()
@@ -192,6 +218,12 @@ namespace PacManRu
             {
                 TimerHeroMelt.Stop();
             }
+        }
+
+        private void TimerEnemyMove_Tick(object sender, EventArgs e)
+        {
+            Enemy.Top += verEnemyVelocity;
+            Enemy.Left += horEnemyVelocity;
         }
     }
 }
