@@ -111,6 +111,8 @@ namespace PacManRu
             TimerHeroMove.Stop();
             TimerHeroAnimate.Stop();
             TimerEnemyAnimate.Stop();
+            heroImage = 0;
+            TimerHeroMelt.Start();
         }
 
         private void Game_KeyDown(object sender, KeyEventArgs e)
