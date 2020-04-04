@@ -16,9 +16,11 @@ namespace PacManRu
         int verVelocity = 0;
         int horVelocity = 0;
         int heroImage = 1;
+        int enemyImage = 1;
         int score = 0;
 
         string heroDirection = "right";
+        string enemyDirection = "down";
         Random Rand = new Random();
 
         public Game()
@@ -37,15 +39,19 @@ namespace PacManRu
 
             Food.BackColor = Color.Green;
             Food.BackColor = Color.Transparent;
+            Food.Width = 30;
+            Food.Height = 30;
             Food.Image = Properties.Resources.food_3;
 
-            Enemy.BackColor = Color.Red;
+            Enemy.BackColor = Color.Transparent;
+            Enemy.SizeMode = PictureBoxSizeMode.StretchImage;
 
             //initialize interface
             UpdateScoreLabel();
             //initializing timers
             TimerHeroMove.Start();
             TimerHeroAnimate.Start();
+            TimerEnemyAnimate.Start();
         }
 
         private void UpdateScoreLabel()
@@ -142,6 +148,18 @@ namespace PacManRu
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void TimerEnemyAnimate_Tick(object sender, EventArgs e)
+        {
+            string enemyImageName;
+            enemyImageName = "enemy_" + enemyDirection + "_" + enemyImage;
+            Enemy.Image = (Image)Properties.Resources.ResourceManager.GetObject(enemyImageName);
+            enemyImage += 1;
+            if (enemyImage > 2)
+            {
+                enemyImage = 1;
+            }
         }
     }
 }
