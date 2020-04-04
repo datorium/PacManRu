@@ -44,6 +44,8 @@ namespace PacManRu
             Food.Image = Properties.Resources.food_3;
 
             Enemy.BackColor = Color.Transparent;
+            Enemy.Width = 40;
+            Enemy.Height = 40;
             Enemy.SizeMode = PictureBoxSizeMode.StretchImage;
 
             //initialize interface
@@ -96,6 +98,21 @@ namespace PacManRu
             }
         }
 
+        private void HeroEnemyCollision()
+        {
+            if (Hero.Bounds.IntersectsWith(Enemy.Bounds))
+            {
+                GameOver();
+            }
+        }
+
+        private void GameOver()
+        {
+            TimerHeroMove.Stop();
+            TimerHeroAnimate.Stop();
+            TimerEnemyAnimate.Stop();
+        }
+
         private void Game_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Up)
@@ -131,6 +148,7 @@ namespace PacManRu
             Hero.Left += horVelocity;
             HeroBorderCollision();
             HeroFoodCollision();
+            HeroEnemyCollision();
         }
 
         private void TimerHeroAnimate_Tick(object sender, EventArgs e)
@@ -159,6 +177,18 @@ namespace PacManRu
             if (enemyImage > 2)
             {
                 enemyImage = 1;
+            }
+        }
+
+        private void TimerHeroMelt_Tick(object sender, EventArgs e)
+        {
+            string heroImageName;
+            heroImageName = "pacman_melt_" + heroImage;
+            Hero.Image = (Image)Properties.Resources.ResourceManager.GetObject(heroImageName);
+            heroImage += 1; //heroImage++
+            if (heroImage > 14)
+            {
+                TimerHeroMelt.Stop();
             }
         }
     }
