@@ -149,6 +149,7 @@ namespace PacManRu
             TimerEnemyMove.Stop();
             heroImage = 0;
             TimerHeroMelt.Start();
+            Food.Visible = false;
         }
 
         private void Game_KeyDown(object sender, KeyEventArgs e)
@@ -228,6 +229,7 @@ namespace PacManRu
             if (heroImage > 14)
             {
                 TimerHeroMelt.Stop();
+                LabelGameOver.Visible = true;
             }
         }
 
