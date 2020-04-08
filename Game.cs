@@ -32,16 +32,18 @@ namespace PacManRu
             SetupGame();
         }
 
+
         private void SetRandomEnemyDirection()
         {
             int directionCode = Rand.Next(1, 5);
-            if(directionCode == 1)
+            if (directionCode == 1)
             {
                 enemyDirection = "right";
                 verEnemyVelocity = 0;
                 horEnemyVelocity = enemyStep;
+
             }
-            else if(directionCode == 2)
+            else if (directionCode == 2)
             {
                 enemyDirection = "down";
                 verEnemyVelocity = enemyStep;
@@ -76,11 +78,11 @@ namespace PacManRu
             Food.Image = Properties.Resources.food_3;
 
             Enemy.BackColor = Color.Transparent;
-            Enemy.Width = 40;
-            Enemy.Height = 40;
             Enemy.SizeMode = PictureBoxSizeMode.StretchImage;
+            Enemy.Width = 30;
+            Enemy.Height = 30;
 
-            SetRandomEnemyDirection();
+
 
             //initialize interface
             UpdateScoreLabel();
@@ -89,6 +91,8 @@ namespace PacManRu
             TimerHeroAnimate.Start();
             TimerEnemyAnimate.Start();
             TimerEnemyMove.Start();
+
+            SetRandomEnemyDirection();
         }
 
         private void UpdateScoreLabel()
@@ -96,14 +100,14 @@ namespace PacManRu
             ScoreLabel.Text = "Score: " + score;
         }
 
-        private void HeroFoodCollision() 
+        private void HeroFoodCollision()
         {
             if (Hero.Bounds.IntersectsWith(Food.Bounds))
             {
                 score += 100;
                 UpdateScoreLabel();
                 RandomizeFood();
-                enemyStep += 1;
+                heroStep += 1;
             }
         }
 
@@ -116,11 +120,11 @@ namespace PacManRu
 
         private void HeroBorderCollision()
         {
-            if(Hero.Top + Hero.Height < 0)
+            if (Hero.Top + Hero.Height < 0)
             {
                 Hero.Top = ClientRectangle.Height;
             }
-            if(Hero.Top > ClientRectangle.Height)
+            if (Hero.Top > ClientRectangle.Height)
             {
                 Hero.Top = 0 - Hero.Height;
             }
@@ -132,6 +136,7 @@ namespace PacManRu
             {
                 Hero.Left = 0 - Hero.Width;
             }
+
         }
 
         private void HeroEnemyCollision()
@@ -150,18 +155,22 @@ namespace PacManRu
             TimerEnemyMove.Stop();
             heroImage = 0;
             TimerHeroMelt.Start();
-            Food.Visible = false;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void Game_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.Up)
             {
                 verVelocity = -heroStep;
                 horVelocity = 0;
                 heroDirection = "up";
             }
-            else if(e.KeyCode == Keys.Down)
+            else if (e.KeyCode == Keys.Down)
             {
                 verVelocity = heroStep;
                 horVelocity = 0;
@@ -180,7 +189,14 @@ namespace PacManRu
                 horVelocity = heroStep;
                 heroDirection = "right";
             }
-            SetRandomEnemyDirection();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Hero.Top += verVelocity;
+            Hero.Left += horVelocity;
+            HeroBorderCollision();
+            HeroFoodCollision();
         }
 
         private void TimerHeroMove_Tick(object sender, EventArgs e)
@@ -198,7 +214,7 @@ namespace PacManRu
             heroImageName = "pacman_" + heroDirection + "_" + heroImage;
             Hero.Image = (Image)Properties.Resources.ResourceManager.GetObject(heroImageName);
             heroImage += 1; //heroImage++
-            if(heroImage > 4)
+            if (heroImage > 4)
             {
                 heroImage = 1;
             }
@@ -223,15 +239,17 @@ namespace PacManRu
 
         private void TimerHeroMelt_Tick(object sender, EventArgs e)
         {
-            string heroImageName;
-            heroImageName = "pacman_melt_" + heroImage;
-            Hero.Image = (Image)Properties.Resources.ResourceManager.GetObject(heroImageName);
-            heroImage += 1; //heroImage++
-            if (heroImage > 14)
             {
-                TimerHeroMelt.Stop();
-                LabelGameOver.Visible = true;
-                buttonRestart.Visible = true;
+                string heroImageName;
+                heroImageName = "pacman_melt_" + heroImage;
+                Hero.Image = (Image)Properties.Resources.ResourceManager.GetObject(heroImageName);
+                heroImage += 1; //heroImage++
+                if (heroImage > 14)
+                {
+                    TimerHeroMelt.Stop();
+                    LabelGameOver.Visible = true;
+                    //ButtonRestart.Visible = true;
+                }
             }
         }
 
@@ -239,40 +257,38 @@ namespace PacManRu
         {
             Enemy.Top += verEnemyVelocity;
             Enemy.Left += horEnemyVelocity;
-            EnemyBorderCollisin();
+            EnemyBorderCollision();
         }
-
-        private void EnemyBorderCollisin()
+        private void EnemyBorderCollision()
         {
-            if (Enemy.Top < 0)
+            if (Enemy.Top + Hero.Height < 0)
             {
-                enemyDirection = "down";
-                verEnemyVelocity = enemyStep;
-                horEnemyVelocity = 0;
+                verEnemyVelocity = 0 - verEnemyVelocity;
             }
-            else if (Enemy.Top + Enemy.Height > ClientRectangle.Height)
+            if (Enemy.Left + Hero.Width < 0)
             {
-                enemyDirection = "up";
-                verEnemyVelocity = -enemyStep;
-                horEnemyVelocity = 0;
+                horEnemyVelocity = 0 - horEnemyVelocity;
             }
-            else if (Enemy.Left < 0)
+            if (Enemy.Left > ClientRectangle.Width)
             {
-                enemyDirection = "right";
-                verEnemyVelocity = 0;
-                horEnemyVelocity = enemyStep;
+                horEnemyVelocity = 0 - horEnemyVelocity;
             }
-            else if (Enemy.Left + Enemy.Width > ClientRectangle.Width)
+            if (Enemy.Top > ClientRectangle.Height)
             {
-                enemyDirection = "left";
-                verEnemyVelocity = 0;
-                horEnemyVelocity = -enemyStep;
+                verEnemyVelocity = 0 - verEnemyVelocity;
             }
         }
 
-        private void buttonRestart_Click(object sender, EventArgs e)
+        private void LabelGameOver_Click(object sender, EventArgs e)
         {
-            Application.Restart();
+
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
+
 }

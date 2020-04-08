@@ -131,7 +131,6 @@
             this.buttonRestart.Text = "RESTART";
             this.buttonRestart.UseVisualStyleBackColor = false;
             this.buttonRestart.Visible = false;
-            this.buttonRestart.Click += new System.EventHandler(this.buttonRestart_Click);
             // 
             // Game
             // 
