@@ -235,6 +235,35 @@ namespace PacManRu
         {
             Enemy.Top += verEnemyVelocity;
             Enemy.Left += horEnemyVelocity;
+            EnemyBorderCollisin();
+        }
+
+        private void EnemyBorderCollisin()
+        {
+            if (Enemy.Top < 0)
+            {
+                enemyDirection = "down";
+                verEnemyVelocity = enemyStep;
+                horEnemyVelocity = 0;
+            }
+            else if (Enemy.Top + Enemy.Height > ClientRectangle.Height)
+            {
+                enemyDirection = "up";
+                verEnemyVelocity = -enemyStep;
+                horEnemyVelocity = 0;
+            }
+            else if (Enemy.Left < 0)
+            {
+                enemyDirection = "right";
+                verEnemyVelocity = 0;
+                horEnemyVelocity = enemyStep;
+            }
+            else if (Enemy.Left + Enemy.Width > ClientRectangle.Width)
+            {
+                enemyDirection = "left";
+                verEnemyVelocity = 0;
+                horEnemyVelocity = -enemyStep;
+            }
         }
     }
 }
