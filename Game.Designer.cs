@@ -40,6 +40,7 @@
             this.TimerHeroMelt = new System.Windows.Forms.Timer(this.components);
             this.TimerEnemyMove = new System.Windows.Forms.Timer(this.components);
             this.LabelGameOver = new System.Windows.Forms.Label();
+            this.buttonRestart = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Hero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Food)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Enemy)).BeginInit();
@@ -118,11 +119,26 @@
             this.LabelGameOver.Text = "Game Over";
             this.LabelGameOver.Visible = false;
             // 
+            // buttonRestart
+            // 
+            this.buttonRestart.BackColor = System.Drawing.Color.Yellow;
+            this.buttonRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRestart.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRestart.Location = new System.Drawing.Point(291, 315);
+            this.buttonRestart.Name = "buttonRestart";
+            this.buttonRestart.Size = new System.Drawing.Size(255, 92);
+            this.buttonRestart.TabIndex = 5;
+            this.buttonRestart.Text = "RESTART";
+            this.buttonRestart.UseVisualStyleBackColor = false;
+            this.buttonRestart.Visible = false;
+            this.buttonRestart.Click += new System.EventHandler(this.buttonRestart_Click);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(805, 445);
+            this.Controls.Add(this.buttonRestart);
             this.Controls.Add(this.LabelGameOver);
             this.Controls.Add(this.ScoreLabel);
             this.Controls.Add(this.Enemy);
@@ -152,6 +168,7 @@
         private System.Windows.Forms.Timer TimerHeroMelt;
         private System.Windows.Forms.Timer TimerEnemyMove;
         private System.Windows.Forms.Label LabelGameOver;
+        private System.Windows.Forms.Button buttonRestart;
     }
 }
 

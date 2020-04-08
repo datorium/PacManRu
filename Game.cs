@@ -231,6 +231,7 @@ namespace PacManRu
             {
                 TimerHeroMelt.Stop();
                 LabelGameOver.Visible = true;
+                buttonRestart.Visible = true;
             }
         }
 
@@ -267,6 +268,11 @@ namespace PacManRu
                 verEnemyVelocity = 0;
                 horEnemyVelocity = -enemyStep;
             }
+        }
+
+        private void buttonRestart_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
     }
 }
