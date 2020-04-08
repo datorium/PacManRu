@@ -103,6 +103,7 @@ namespace PacManRu
                 score += 100;
                 UpdateScoreLabel();
                 RandomizeFood();
+                enemyStep += 1;
             }
         }
 
